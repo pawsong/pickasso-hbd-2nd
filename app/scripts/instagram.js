@@ -23,6 +23,8 @@ $(document).ready(function () {
 
     function insert (data) {
 
+      console.log('[insert] new data inserted');
+
       var overflowLen = queue.length + data.length - MAX_QUEUE_SIZE;
 
       if (overflowLen > 0) {
@@ -58,7 +60,7 @@ $(document).ready(function () {
         maxIndex = index;
       }
 
-      console.log('index=%d, maxIndex=%d, queueLen=%d', index, maxIndex, queueLen);
+      console.log('[next] index=%d, maxIndex=%d, queueLen=%d', index, maxIndex, queueLen);
 
       return queue[index];
     }
@@ -118,7 +120,7 @@ $(document).ready(function () {
 
   var $instaGallery = $('#instaGallery');
 
-  var oldElem = null;
+  var prevResult = null;
 
   async.forever(function (done) {
 
@@ -131,71 +133,75 @@ $(document).ready(function () {
       };
     }
 
-    if (obj.type === 'image') {
+    async.parallel({
 
-      async.waterfall([
-
-        // Load
-        function (callback) {
-
-          var img = $('<img class="instagram-wrapper" src="' + obj.url + '">');
-          $instaGallery.prepend(img);
-
-          img.load(function () {
-            callback(null, img);
-          });
-
-        },
-
-        // Play
-        function (elem, callback) {
-
-          if (oldElem) {
-            oldElem.remove();
-          }
-
-          oldElem = elem;
-
-          setTimeout(callback, IMG_DELAY);
+      // Play current obj
+      current: function (callback) {
+        if (!prevResult) {
+          return callback();
         }
 
-      ], done);
+        prevResult.play(callback);
+      },
 
-    } else {
+      // Load next obj
+      next: function (callback) {
 
-      async.waterfall([
+        var prevElem, play;
 
-        // Load
-        function (callback) {
+        if (obj.type === 'image') {
 
-          var vid = $('<video class="instagram-wrapper" src="' + obj.url + '">');
-          $instaGallery.prepend(vid);
+          prevElem = $('<img class="instagram-wrapper" src="' + obj.url + '">');
+          $instaGallery.prepend(prevElem);
 
-          var rawVid = vid[0];
-          rawVid.oncanplay = function() {
-            callback(null, vid);
+          play = function (cb) {
+            setTimeout(cb, IMG_DELAY);
           };
 
-        },
-
-        // Play
-        function (elem, callback) {
-
-          if (oldElem) {
-            oldElem.remove();
-          }
-
-          oldElem = elem;
-
-          oldElem[0].play();
-          oldElem.bind('ended', function () {
-            callback();
+          prevElem.load(function () {
+            callback(null, {
+              elem: prevElem,
+              play: play
+            });
           });
+
+        } else {
+
+          prevElem = $('<video class="instagram-wrapper" src="' + obj.url + '">');
+          $instaGallery.prepend(prevElem);
+
+          var rawVid = prevElem[0];
+
+          play = function (cb) {
+            rawVid.play();
+            prevElem.bind('ended', function () {
+              cb();
+            });
+          };
+
+          rawVid.oncanplay = function () {
+            callback(null, {
+              elem: prevElem,
+              play: play
+            });
+          };
+
         }
+      }
+    }, function (err, results) {
+      if (err) {
+        return done(err);
+      }
 
-      ], done);
+      if (prevResult) {
+        prevResult.elem.remove();
+      }
 
-    }
+      prevResult = results.next;
+
+      done();
+
+    });
 
   }, function (err) {
     if (err) {
