@@ -2,8 +2,8 @@
 
 $(document).ready(function () {
 
-  var WALLPAPER_LOAD_TIME = 5 * 1000;
-  var WALLPAPER_DELAY = 10 * 1000;
+  var WALLPAPER_LOAD_TIME = 20 * 1000;
+  var WALLPAPER_DELAY = 60 * 1000;
 
   var WALLPAPER_NUM = 2;
 
