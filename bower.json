@@ -1,0 +1,12 @@
+{
+  "name": "pickasso-party",
+  "private": true,
+  "dependencies": {
+    "modernizr": "~2.6.2",
+    "jquery": "~1.11.0",
+    "threejs": "*",
+    "socket.io-client": "~1.1.0",
+    "async": "~0.9.0"
+  },
+  "devDependencies": {}
+}
