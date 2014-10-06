@@ -5,5 +5,5 @@ var app = connect()
 require('http').createServer(app)
   .listen(3100)
   .on('listening', function () {
-    console.log('Started connect web server on http://localhost:3000');
+    console.log('Started connect web server on http://localhost:3100');
   });
