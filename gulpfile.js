@@ -72,8 +72,8 @@ gulp.task('wallpapers', function () {
 });
 
 gulp.task('threejs', function () {
-  return gulp.src(['app/bower_components/threejs/build/three.min.js'])
-    .pipe(gulp.dest('dist/bower_components/threejs/build'));
+  return gulp.src(['build/*.*'])
+    .pipe(gulp.dest('build'));
 });
 
 gulp.task('clean', function () {

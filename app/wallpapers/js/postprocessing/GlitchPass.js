@@ -21,7 +21,7 @@ THREE.GlitchPass = function ( dt_size ) {
 		fragmentShader: shader.fragmentShader
 	});
 
-//	console.log(this.material);
+	console.log(this.material);
 	
 	this.enabled = true;
 	this.renderToScreen = false;
@@ -91,7 +91,7 @@ THREE.GlitchPass.prototype = {
 	generateHeightmap:function(dt_size)
 	{
 		var data_arr = new Float32Array( dt_size*dt_size * 3 );
-//		console.log(dt_size);
+		console.log(dt_size);
 		var length=dt_size*dt_size;
 		
 		for ( var i = 0; i < length; i++) 
@@ -103,8 +103,8 @@ THREE.GlitchPass.prototype = {
 		}
 		
 		var texture = new THREE.DataTexture( data_arr, dt_size, dt_size, THREE.RGBFormat, THREE.FloatType );
-//		console.log(texture);
-//		console.log(dt_size);
+		console.log(texture);
+		console.log(dt_size);
 		texture.minFilter = THREE.NearestFilter;
 		texture.magFilter = THREE.NearestFilter;
 		texture.needsUpdate = true;
