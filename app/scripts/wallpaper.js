@@ -28,7 +28,7 @@ $(document).ready(function () {
 
   console.log('WALLPAPER_LOAD_TIME : %d', WALLPAPER_LOAD_TIME);
   console.log('WALLPAPER_DELAY : %d', WALLPAPER_DELAY);
-  console.log('LOW_PERFORMANCE : %d', LOW_PERFORMANCE);
+  console.log('LOW_PERFORMANCE : %s', LOW_PERFORMANCE);
 
   var WALLPAPER_LOAD_TIME_MILLI = WALLPAPER_LOAD_TIME * 1000;
   var WALLPAPER_DELAY_MILLI = WALLPAPER_DELAY * 1000;
