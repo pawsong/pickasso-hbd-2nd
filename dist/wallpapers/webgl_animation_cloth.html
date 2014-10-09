@@ -34,13 +34,13 @@
 	</head>
 
 	<body>
-		<div id="info">Simple Cloth Simulation<br/>
-			Verlet integration with Constrains relaxation<br/>
-			Toggle: <a onclick="rotate = !rotate;">Camera</a> |
-			<a onclick="wind = !wind;">Wind</a> |
-			<a onclick="sphere.visible = !sphere.visible;">Ball</a> |
-			<a onclick="togglePins();">Pins</a>
-		</div>
+		<!--<div id="info">Simple Cloth Simulation<br/>-->
+			<!--Verlet integration with Constrains relaxation<br/>-->
+			<!--Toggle: <a onclick="rotate = !rotate;">Camera</a> |-->
+			<!--<a onclick="wind = !wind;">Wind</a> |-->
+			<!--<a onclick="sphere.visible = !sphere.visible;">Ball</a> |-->
+			<!--<a onclick="togglePins();">Pins</a>-->
+		<!--</div>-->
 
 		<script src="../build/three.min.js"></script>
 
@@ -300,8 +300,8 @@
 
 				//
 
-				stats = new Stats();
-				container.appendChild( stats.domElement );
+//				stats = new Stats();
+//				container.appendChild( stats.domElement );
 
 				//
 
@@ -337,7 +337,7 @@
 
 				simulate(time);
 				render();
-				stats.update();
+//				stats.update();
 
 			}
 

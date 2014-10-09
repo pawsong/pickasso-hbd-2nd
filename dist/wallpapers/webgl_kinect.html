@@ -125,10 +125,10 @@
 				container = document.createElement( 'div' );
 				document.body.appendChild( container );
 
-				var info = document.createElement( 'div' );
-				info.id = 'info';
-				info.innerHTML = '<a href="http://threejs.org" target="_blank">three.js</a> - kinect';
-				document.body.appendChild( info );
+//				var info = document.createElement( 'div' );
+//				info.id = 'info';
+//				info.innerHTML = '<a href="http://threejs.org" target="_blank">three.js</a> - kinect';
+//				document.body.appendChild( info );
 
 				stats = new Stats();
 				stats.domElement.style.position = 'absolute';
@@ -200,12 +200,12 @@
 					}, 1000 / 30 );
 
 
-					var gui = new dat.GUI();
-					gui.add( material.uniforms.nearClipping, 'value', 1, 10000, 1.0 ).name( 'nearClipping' );
-					gui.add( material.uniforms.farClipping, 'value', 1, 10000, 1.0 ).name( 'farClipping' );
-					gui.add( material.uniforms.pointSize, 'value', 1, 10, 1.0 ).name( 'pointSize' );
-					gui.add( material.uniforms.zOffset, 'value', 0, 4000, 1.0 ).name( 'zOffset' );
-					gui.close();
+//					var gui = new dat.GUI();
+//					gui.add( material.uniforms.nearClipping, 'value', 1, 10000, 1.0 ).name( 'nearClipping' );
+//					gui.add( material.uniforms.farClipping, 'value', 1, 10000, 1.0 ).name( 'farClipping' );
+//					gui.add( material.uniforms.pointSize, 'value', 1, 10, 1.0 ).name( 'pointSize' );
+//					gui.add( material.uniforms.zOffset, 'value', 0, 4000, 1.0 ).name( 'zOffset' );
+//					gui.close();
 
 
 				}, false );

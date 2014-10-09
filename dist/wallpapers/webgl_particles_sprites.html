@@ -32,10 +32,10 @@
 	</head>
 	<body>
 
-		<div id="info">
-			<a href="http://threejs.org" target="_blank">three.js</a> - webgl particle sprites example -
-			snowflakes by <a href="http://en.wikipedia.org/wiki/File:Sketch_of_snow_crystal_by_Ren%C3%A9_Descartes.jpg">Ren&eacute;  Descartes</a>
-		</div>
+		<!--<div id="info">-->
+			<!--<a href="http://threejs.org" target="_blank">three.js</a> - webgl particle sprites example --->
+			<!--snowflakes by <a href="http://en.wikipedia.org/wiki/File:Sketch_of_snow_crystal_by_Ren%C3%A9_Descartes.jpg">Ren&eacute;  Descartes</a>-->
+		<!--</div>-->
 
 		<script src="../build/three.min.js"></script>
 
@@ -116,10 +116,10 @@
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				container.appendChild( renderer.domElement );
 
-				stats = new Stats();
-				stats.domElement.style.position = 'absolute';
-				stats.domElement.style.top = '0px';
-				container.appendChild( stats.domElement );
+//				stats = new Stats();
+//				stats.domElement.style.position = 'absolute';
+//				stats.domElement.style.top = '0px';
+//				container.appendChild( stats.domElement );
 
 				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 				document.addEventListener( 'touchstart', onDocumentTouchStart, false );
@@ -183,7 +183,7 @@
 				requestAnimationFrame( animate );
 
 				render();
-				stats.update();
+//				stats.update();
 
 			}
 

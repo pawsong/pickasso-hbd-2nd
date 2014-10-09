@@ -31,7 +31,7 @@
 	</head>
 
 	<body>
-		<div id="info"><a href="http://threejs.org" target="_blank">three.js</a> - custom attributes example - particles</div>
+		<!--<div id="info"><a href="http://threejs.org" target="_blank">three.js</a> - custom attributes example - particles</div>-->
 		<div id="container"></div>
 
 		<script src="../build/three.min.js"></script>
@@ -175,10 +175,10 @@
 			var container = document.getElementById( 'container' );
 			container.appendChild( renderer.domElement );
 
-			stats = new Stats();
-			stats.domElement.style.position = 'absolute';
-			stats.domElement.style.top = '0px';
-			container.appendChild( stats.domElement );
+//			stats = new Stats();
+//			stats.domElement.style.position = 'absolute';
+//			stats.domElement.style.top = '0px';
+//			container.appendChild( stats.domElement );
 
 			//
 
@@ -200,7 +200,7 @@
 			requestAnimationFrame( animate );
 
 			render();
-			stats.update();
+//			stats.update();
 
 		}
 

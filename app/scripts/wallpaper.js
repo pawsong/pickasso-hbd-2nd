@@ -8,24 +8,24 @@ $(document).ready(function () {
     'webgl_helpers', //yes
 //    'webgl_postprocessing_dof2', // no
     'webgl_interactive_particles', // yes
-    'webgl_materials_cubemap_dynamic2', // no
+//    'webgl_materials_cubemap_dynamic2', // no
     'webgl_kinect', // yes
 //    'webgl_loader_json_blender', // no
     'webgl_materials_cubemap_balls_reflection', // yes
     'webgl_materials_cubemap', // yes
-//
+
     'webgl_effects_vr', // yes
     'webgl_geometry_hierarchy', // yes
 //    'webgl_performance', // no
 //    'webgl_postprocessing_advanced', // no
     'webgl_rtt', // yes
 //    'webgl_loader_ctm', // no
-//
+
     'webgl_buffergeometry_custom_attributes_particles', // yes
     'webgl_animation_cloth', // yes
     'webgl_custom_attributes_particles', // yes
     'webgl_postprocessing', // yes
-    'webgl_effects_parallaxbarrier', // yes
+//    'webgl_effects_parallaxbarrier', // no
     'webgl_particles_random', // yes
     'webgl_particles_sprites', // yes
     'webgl_postprocessing_glitch' // yes

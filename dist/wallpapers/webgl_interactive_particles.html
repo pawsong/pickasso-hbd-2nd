@@ -29,7 +29,7 @@
 
 	<body>
 		<div id="container"></div>
-		<div id="info"><a href="http://threejs.org" target="_blank">three.js</a> webgl - interactive - particles</div>
+		<!--<div id="info"><a href="http://threejs.org" target="_blank">three.js</a> webgl - interactive - particles</div>-->
 
 		<script src="../build/three.min.js"></script>
 
@@ -163,10 +163,10 @@
 
 				//
 
-				stats = new Stats();
-				stats.domElement.style.position = 'absolute';
-				stats.domElement.style.top = '0px';
-				container.appendChild( stats.domElement );
+//				stats = new Stats();
+//				stats.domElement.style.position = 'absolute';
+//				stats.domElement.style.top = '0px';
+//				container.appendChild( stats.domElement );
 
 				//
 
@@ -198,7 +198,7 @@
 				requestAnimationFrame( animate );
 
 				render();
-				stats.update();
+//				stats.update();
 
 			}
 

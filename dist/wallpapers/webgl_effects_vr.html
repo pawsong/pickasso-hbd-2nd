@@ -34,7 +34,7 @@
 		</style>
 	</head>
 	<body>
-		<div class="button">Start VR Mode</div>
+		<!--<div class="button">Start VR Mode</div>-->
 
 		<script src="../build/three.js"></script>
 		<script src="js/effects/VREffect.js"></script>
@@ -47,7 +47,7 @@
 			var camera, scene, projector, raycaster, renderer;
 			var vrEffect;
 			var vrControls;
-			var fullScreenButton = document.querySelector( '.button' );
+//			var fullScreenButton = document.querySelector( '.button' );
 
 			var mouse = new THREE.Vector2(), INTERSECTED;
 			var radius = 100, theta = 0;
@@ -60,13 +60,13 @@
 				container = document.createElement( 'div' );
 				document.body.appendChild( container );
 
-				var info = document.createElement( 'div' );
-				info.style.position = 'absolute';
-				info.style.top = '10px';
-				info.style.width = '100%';
-				info.style.textAlign = 'center';
-				info.innerHTML = '<a href="http://threejs.org" target="_blank">three.js</a> webgl - interactive cubes';
-				container.appendChild( info );
+//				var info = document.createElement( 'div' );
+//				info.style.position = 'absolute';
+//				info.style.top = '10px';
+//				info.style.width = '100%';
+//				info.style.textAlign = 'center';
+//				info.innerHTML = '<a href="http://threejs.org" target="_blank">three.js</a> webgl - interactive cubes';
+//				container.appendChild( info );
 
 				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 10000 );
 
@@ -107,18 +107,18 @@
 
 				renderer = new THREE.WebGLRenderer();
 
-				var fullScreenButton = document.querySelector( '.button' );
-				fullScreenButton.onclick = function() {
-					vrEffect.setFullScreen( true );
-				};
+//				var fullScreenButton = document.querySelector( '.button' );
+//				fullScreenButton.onclick = function() {
+//					vrEffect.setFullScreen( true );
+//				};
 
 				vrEffect = new THREE.VREffect(renderer, VREffectLoaded);
 				vrControls = new THREE.VRControls(camera);
 				function VREffectLoaded(error) {
-					if (error) {
-						fullScreenButton.innerHTML = error;
-						fullScreenButton.classList.add('error');
-					}
+//					if (error) {
+//						fullScreenButton.innerHTML = error;
+//						fullScreenButton.classList.add('error');
+//					}
 				}
 
 				renderer.setClearColor( 0xf0f0f0 );
@@ -126,10 +126,10 @@
 				renderer.sortObjects = false;
 				container.appendChild( renderer.domElement );
 
-				stats = new Stats();
-				stats.domElement.style.position = 'absolute';
-				stats.domElement.style.top = '0px';
-				container.appendChild( stats.domElement );
+//				stats = new Stats();
+//				stats.domElement.style.position = 'absolute';
+//				stats.domElement.style.top = '0px';
+//				container.appendChild( stats.domElement );
 
 				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 
@@ -164,7 +164,7 @@
 				requestAnimationFrame( animate );
 
 				render();
-				stats.update();
+//				stats.update();
 
 			}
 
