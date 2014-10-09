@@ -58,10 +58,7 @@ $(document).ready(function () {
 
       'webgl_buffergeometry_custom_attributes_particles', // yes
       'webgl_animation_cloth', // yes
-      'webgl_custom_attributes_particles', // yes
-      'webgl_postprocessing', // yes
       'webgl_particles_random', // yes
-      'webgl_particles_sprites', // yes
       'webgl_postprocessing_glitch' // yes
 
     ];
@@ -89,10 +86,7 @@ $(document).ready(function () {
 
       'webgl_buffergeometry_custom_attributes_particles', // yes
       'webgl_animation_cloth', // yes
-      'webgl_custom_attributes_particles', // yes
-      'webgl_postprocessing', // yes
       'webgl_particles_random', // yes
-      'webgl_particles_sprites', // yes
       'webgl_postprocessing_glitch' // yes
 
     ];
