@@ -1,5 +1,6 @@
 'use strict';
 
+var tags = require('./tags');
 var ig = require('./instagram');
 
 module.exports = function* (server) {
@@ -16,10 +17,11 @@ module.exports = function* (server) {
   console.log('remaining: %d', remaining);
   console.log('limit: %d', limit);
 
-  var tags = {
-    'pickasso': false,
-    'pickassotest': false
-  };
+  var tagMap = {};
+
+  tags.forEach(function (tag) {
+    tagMap[tag] = false;
+  });
 
   for (let i = 0; i < subscriptions.length; ++i) {
 
@@ -30,8 +32,8 @@ module.exports = function* (server) {
 
     let tag = subscription.object_id;
   
-    if (tags[tag] === false) {
-      tags[tag] = true;
+    if (tagMap[tag] === false) {
+      tagMap[tag] = true;
     }
 
     console.log('Now subscribing %s tag ...', tag);
@@ -48,9 +50,9 @@ module.exports = function* (server) {
 
   var keys = Object.keys(tags);
 
-  for (let i = 0; i < keys.length; ++i) {
-    let tag = keys[i];
-    if (tags[tag] === false) {
+  for (let i = 0; i < tags.length; ++i) {
+    let tag = tags[i];
+    if (tagMap[tag] === false) {
       ret = yield subscribe(tag);
       console.log(ret);
     }

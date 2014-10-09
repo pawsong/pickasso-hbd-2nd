@@ -24,6 +24,7 @@ $(document).ready(function () {
 
   // Instagram tag
   var TAG = getParameterByName('TAG', 'pickasso', true);
+  var SUB_TAGS = getParameterByName('SUB_TAGS', '4983project,cakeshopseoul', true);
 
   // 한 이미지를 유지하고 있는 시간(ms)
   var IMG_DELAY = getParameterByName('IMG_DELAY', 5);
@@ -32,9 +33,11 @@ $(document).ready(function () {
   var MAX_QUEUE_SIZE = getParameterByName('MAX_QUEUE_SIZE', 20);
 
   console.log('TAG : %s', TAG);
+  console.log('SUB_TAGS : %s', SUB_TAGS);
   console.log('IMG_DELAY : %d', IMG_DELAY);
   console.log('MAX_QUEUE_SIZE : %d', MAX_QUEUE_SIZE);
 
+  var SUB_TAG_LIST = SUB_TAGS.split(',');
   var IMG_DELAY_MILLI = IMG_DELAY * 1000;
 
   // Make queue
@@ -101,25 +104,30 @@ $(document).ready(function () {
   // Socket IO job
   var socket = io('http://1.234.4.209:3000');
 
-  function ioHandler (init) {
+  function ioHandler (payload) {
 
-    return function (payload) {
+    var tag = payload.tag;
 
-      if (!payload.tag) {
-        console.error('Cannot find tag');
+    if (!tag) {
+      console.error('Cannot find tag');
+      return;
+    }
+
+    if (payload.init) {
+      if (tag !== TAG) {
         return;
       }
 
-      if (payload.tag !== TAG) {
-        return;
-      }
+      console.log('Initialize ...');
 
-      if (init) {
-        iQueue.reset();
-      }
+      iQueue.reset();
+    }
 
-      iQueue.insert(payload.data);
-    };
+    if (tag !== TAG && -1 === SUB_TAG_LIST.indexOf(tag)) {
+      return;
+    }
+
+    iQueue.insert(payload.data);
 
   }
 
@@ -127,8 +135,8 @@ $(document).ready(function () {
 
     console.log('connected');
 
-    socket.on('init', ioHandler(true));
-    socket.on('data', ioHandler(false));
+    socket.on('init', ioHandler);
+    socket.on('data', ioHandler);
 
   });
 

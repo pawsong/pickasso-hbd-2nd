@@ -14,6 +14,7 @@ var app = koa();
 
 var ig = require('./server/instagram');
 
+var tags = require('./server/tags');
 var initialize = require('./server/init');
 
 co(function* () {
@@ -55,13 +56,12 @@ co(function* () {
     };
   }
 
-  var pickassoQueue = yield queueGen('pickasso');
-  var pickassotestQueue = yield queueGen('pickassotest');
+  var queueMap = {};
 
-  var queueMap = {
-    pickasso: pickassoQueue,
-    pickassotest: pickassotestQueue
-  };
+  for (let i = 0; i < tags.length; ++i) {
+    let tag = tags[i];
+    queueMap[tag] = yield queueGen(tag);
+  }
 
   // Error handling
   app.use(function* (next) {

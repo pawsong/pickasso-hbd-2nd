@@ -9,6 +9,7 @@ module.exports = function(io, queueMap) {
     tags.forEach(function (tag) {
       socket.emit('init', {
         tag: tag,
+        init: true,
         data: queueMap[tag].data
       });
     });
