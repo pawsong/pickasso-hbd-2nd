@@ -22,6 +22,8 @@ $(document).ready(function () {
     return number > 0 ? number : def;
   }
 
+  var DEBUG = getParameterByName('DEBUG', 'FALSE', true);
+
   // Instagram tag
   var TAG = getParameterByName('TAG', 'pickasso', true);
   var SUB_TAGS = getParameterByName('SUB_TAGS', '4983project,cakeshopseoul', true);
@@ -32,6 +34,7 @@ $(document).ready(function () {
   // Queue size
   var MAX_QUEUE_SIZE = getParameterByName('MAX_QUEUE_SIZE', 20);
 
+  console.log('DEBUG : %s', DEBUG);
   console.log('TAG : %s', TAG);
   console.log('SUB_TAGS : %s', SUB_TAGS);
   console.log('IMG_DELAY : %d', IMG_DELAY);
@@ -39,6 +42,8 @@ $(document).ready(function () {
 
   var SUB_TAG_LIST = SUB_TAGS.split(',');
   var IMG_DELAY_MILLI = IMG_DELAY * 1000;
+
+  var DEBUG_MODE = DEBUG === 'TRUE';
 
   // Make queue
   function generateQueue () {
@@ -53,7 +58,7 @@ $(document).ready(function () {
 
     function insert (data) {
 
-      console.log('[insert] new data inserted');
+      if (DEBUG_MODE) { console.log('[insert] new data inserted'); }
 
       var overflowLen = queue.length + data.length - MAX_QUEUE_SIZE;
 
@@ -85,7 +90,7 @@ $(document).ready(function () {
         index = queueLen - 1;
       }
 
-      console.log('[next] index=%d, queueLen=%d', index, queueLen);
+      if (DEBUG_MODE) { console.log('[next] index=%d, queueLen=%d', index, queueLen); }
 
       return queue[index];
     }
@@ -118,7 +123,7 @@ $(document).ready(function () {
         return;
       }
 
-      console.log('Initialize ...');
+      if (DEBUG_MODE) { console.log('Initialize ...'); }
 
       iQueue.reset();
     }
@@ -133,7 +138,7 @@ $(document).ready(function () {
 
   socket.on('connect', function(){
 
-    console.log('connected');
+    if (DEBUG_MODE) { console.log('connected'); }
 
     socket.on('init', ioHandler);
     socket.on('data', ioHandler);
