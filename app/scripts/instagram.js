@@ -29,7 +29,7 @@ $(document).ready(function () {
   var SUB_TAGS = getParameterByName('SUB_TAGS', '4983project,cakeshopseoul', true);
 
   // 한 이미지를 유지하고 있는 시간(ms)
-  var IMG_DELAY = getParameterByName('IMG_DELAY', 5);
+  var IMG_DELAY = getParameterByName('IMG_DELAY', 15);
 
   // Queue size
   var MAX_QUEUE_SIZE = getParameterByName('MAX_QUEUE_SIZE', 20);

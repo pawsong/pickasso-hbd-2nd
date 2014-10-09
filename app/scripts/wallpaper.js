@@ -23,7 +23,7 @@ $(document).ready(function () {
   }
 
   var WALLPAPER_LOAD_TIME = getParameterByName('WALLPAPER_LOAD_TIME', 5);
-  var WALLPAPER_DELAY = getParameterByName('WALLPAPER_DELAY', 10);
+  var WALLPAPER_DELAY = getParameterByName('WALLPAPER_DELAY', 60);
   var LOW_PERFORMANCE = getParameterByName('LOW_PERFORMANCE', 'FALSE', true);
 
   console.log('WALLPAPER_LOAD_TIME : %d', WALLPAPER_LOAD_TIME);
