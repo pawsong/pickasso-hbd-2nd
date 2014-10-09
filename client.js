@@ -1,6 +1,8 @@
 var connect = require('connect');
 var app = connect()
-  .use(connect.static('dist'));
+  .use(connect.static('dist', { 
+    maxAge: 24 * 60 * 60 * 1000
+  }));
 
 require('http').createServer(app)
   .listen(3100)
