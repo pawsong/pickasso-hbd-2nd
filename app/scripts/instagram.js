@@ -236,7 +236,7 @@ $(document).ready(function () {
       // Load next obj
       next: function (callback) {
 
-        var prevElem, play;
+        var elem, play;
 
         async.parallel([
 
@@ -245,27 +245,27 @@ $(document).ready(function () {
 
             if (obj.type === 'image') {
 
-              prevElem = $('<img class="instagram-wrapper" src="' + obj.url + '">');
-              $instaGallery.prepend(prevElem);
+              elem = $('<img class="instagram-wrapper" src="' + obj.url + '">');
+              $instaGallery.prepend(elem);
 
               play = function (cb) {
                 setTimeout(cb, IMG_DELAY_MILLI);
               };
 
-              prevElem.load(function () {
+              elem.load(function () {
                 cb(INSTA_RESULT_OK);
               });
 
             } else {
 
-              prevElem = $('<video class="instagram-wrapper" src="' + obj.url + '">');
-              $instaGallery.prepend(prevElem);
+              elem = $('<video class="instagram-wrapper" src="' + obj.url + '">');
+              $instaGallery.prepend(elem);
 
-              var rawVid = prevElem[0];
+              var rawVid = elem[0];
 
               play = function (cb) {
                 rawVid.play();
-                prevElem.bind('ended', function () {
+                elem.bind('ended', function () {
                   cb();
                 });
               };
@@ -297,7 +297,7 @@ $(document).ready(function () {
           }
 
           callback(null, {
-            elem: prevElem,
+            elem: elem,
             play: play
           });
 
