@@ -13,12 +13,10 @@ $(document).ready(function () {
 
     var queue = [];
     var index = -1;
-    var maxIndex = -1;
 
     function reset () {
       queue = [];
       index = -1;
-      maxIndex = -1;
     }
 
     function insert (data) {
@@ -28,13 +26,12 @@ $(document).ready(function () {
       var overflowLen = queue.length + data.length - MAX_QUEUE_SIZE;
 
       if (overflowLen > 0) {
-        maxIndex = Math.max(maxIndex - overflowLen, -1);
         queue = queue.slice(overflowLen).concat(data);
       } else {
         queue = queue.concat(data);
       }
 
-      index = maxIndex;
+      index = queue.length - 2;
 
     }
 
@@ -56,11 +53,7 @@ $(document).ready(function () {
         index = 0;
       }
 
-      if (index > maxIndex) {
-        maxIndex = index;
-      }
-
-      console.log('[next] index=%d, maxIndex=%d, queueLen=%d', index, maxIndex, queueLen);
+      console.log('[next] index=%d, maxIndex=%d, queueLen=%d', index, queueLen);
 
       return queue[index];
     }
