@@ -44,11 +44,11 @@ $(document).ready(function () {
   function generateQueue () {
 
     var queue = [];
-    var index = -1;
+    var index = 0;
 
     function reset () {
       queue = [];
-      index = -1;
+      index = 0;
     }
 
     function insert (data) {
@@ -63,7 +63,7 @@ $(document).ready(function () {
         queue = queue.concat(data);
       }
 
-      index = queue.length - 2;
+      index = queue.length;
 
     }
 
@@ -79,10 +79,10 @@ $(document).ready(function () {
         return null;
       }
 
-      index = index + 1;
+      index = index - 1;
 
-      if (index >= queue.length) {
-        index = 0;
+      if (index < 0) {
+        index = queueLen - 1;
       }
 
       console.log('[next] index=%d, queueLen=%d', index, queueLen);
