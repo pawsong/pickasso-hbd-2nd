@@ -34,11 +34,14 @@ $(document).ready(function () {
   // Queue size
   var MAX_QUEUE_SIZE = getParameterByName('MAX_QUEUE_SIZE', 20);
 
+  var NOTI_PERIOD = getParameterByName('NOTI_PERIOD', 10);
+
   console.log('DEBUG : %s', DEBUG);
   console.log('TAG : %s', TAG);
   console.log('SUB_TAGS : %s', SUB_TAGS);
   console.log('IMG_DELAY : %d', IMG_DELAY);
   console.log('MAX_QUEUE_SIZE : %d', MAX_QUEUE_SIZE);
+  console.log('NOTI_PERIOD : %d', NOTI_PERIOD);
 
   var SUB_TAG_LIST = SUB_TAGS.split(',');
   var IMG_DELAY_MILLI = IMG_DELAY * 1000;
@@ -149,14 +152,33 @@ $(document).ready(function () {
 
   var prevResult = null;
 
+  var notiCounter = 0;
+
   async.forever(function (done) {
 
-    var obj = iQueue.next();
+    var obj;
+
+    if (notiCounter < NOTI_PERIOD) {
+
+      obj = iQueue.next();
+
+      notiCounter++;
+
+    } else {
+
+      obj = {
+        type: 'image',
+        url: '/images/fonta.jpg'
+      };
+
+      notiCounter = 0;
+
+    }
 
     if (!obj) {
       obj = {
         type: 'image',
-        url: 'http://scontent-a.cdninstagram.com/hphotos-xap1/t51.2885-15/1388826_1549781818588246_826641552_n.jpg'
+        url: '/images/logo.jpg'
       };
     }
 
