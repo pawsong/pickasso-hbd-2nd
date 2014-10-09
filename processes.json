@@ -1,0 +1,10 @@
+{
+  "apps" : [{
+    "name"        : "pkss-hbd-server",
+    "script"      : "./server.js",
+    "node_args"   : "--harmony"
+  },{
+    "name"        : "pkss-hbd-cli",
+    "script"      : "./client.js"
+  }]
+}
