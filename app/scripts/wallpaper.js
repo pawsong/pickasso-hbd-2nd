@@ -4,31 +4,31 @@ $(document).ready(function () {
 
   var WALLPAPER_LIST = [
 
-    'webgl_video_panorama_equirectangular',
-    'webgl_helpers',
-    'webgl_postprocessing_dof2',
-    'webgl_interactive_particles',
-    'webgl_materials_cubemap_dynamic2',
-    'webgl_kinect',
-    'webgl_loader_json_blender',
-    'webgl_materials_cubemap_balls_reflection',
-    'webgl_materials_cubemap',
-
-    'webgl_effects_vr',
-    'webgl_geometry_hierarchy',
-    'webgl_performance',
-    'webgl_postprocessing_advanced',
-    'webgl_rtt',
-    'webgl_loader_ctm',
-
-    'webgl_buffergeometry_custom_attributes_particles',
-    'webgl_animation_cloth',
-    'webgl_custom_attributes_particles',
-    'webgl_postprocessing',
-    'webgl_effects_parallaxbarrier',
-    'webgl_particles_random',
-    'webgl_particles_sprites',
-    'webgl_postprocessing_glitch'
+    'webgl_video_panorama_equirectangular', // yes
+    'webgl_helpers', //yes
+//    'webgl_postprocessing_dof2', // no
+    'webgl_interactive_particles', // yes
+    'webgl_materials_cubemap_dynamic2', // no
+    'webgl_kinect', // yes
+//    'webgl_loader_json_blender', // no
+    'webgl_materials_cubemap_balls_reflection', // yes
+    'webgl_materials_cubemap', // yes
+//
+    'webgl_effects_vr', // yes
+    'webgl_geometry_hierarchy', // yes
+//    'webgl_performance', // no
+//    'webgl_postprocessing_advanced', // no
+    'webgl_rtt', // yes
+//    'webgl_loader_ctm', // no
+//
+    'webgl_buffergeometry_custom_attributes_particles', // yes
+    'webgl_animation_cloth', // yes
+    'webgl_custom_attributes_particles', // yes
+    'webgl_postprocessing', // yes
+    'webgl_effects_parallaxbarrier', // yes
+    'webgl_particles_random', // yes
+    'webgl_particles_sprites', // yes
+    'webgl_postprocessing_glitch' // yes
 
   ];
 
