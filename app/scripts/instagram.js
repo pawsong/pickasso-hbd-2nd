@@ -36,12 +36,19 @@ $(document).ready(function () {
 
   var NOTI_PERIOD = getParameterByName('NOTI_PERIOD', 10);
 
+  var NO_INSTAGRAM = getParameterByName('NO_INSTAGRAM', 'FALSE', true);
+
   console.log('DEBUG : %s', DEBUG);
   console.log('TAG : %s', TAG);
   console.log('SUB_TAGS : %s', SUB_TAGS);
   console.log('IMG_DELAY : %d', IMG_DELAY);
   console.log('MAX_QUEUE_SIZE : %d', MAX_QUEUE_SIZE);
   console.log('NOTI_PERIOD : %d', NOTI_PERIOD);
+  console.log('NO_INSTAGRAM : %s', NO_INSTAGRAM);
+
+  if (NO_INSTAGRAM === 'TRUE') {
+    return;
+  }
 
   var SUB_TAG_LIST = SUB_TAGS.split(',');
   var IMG_DELAY_MILLI = IMG_DELAY * 1000;
@@ -168,7 +175,7 @@ $(document).ready(function () {
 
       obj = {
         type: 'image',
-        url: '/images/fonta.jpg'
+        url: '/images/noti.jpg'
       };
 
       notiCounter = 0;
