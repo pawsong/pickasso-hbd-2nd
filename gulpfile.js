@@ -72,8 +72,8 @@ gulp.task('wallpapers', function () {
 });
 
 gulp.task('threejs', function () {
-  return gulp.src(['build/*.*'])
-    .pipe(gulp.dest('build'));
+  return gulp.src(['app/build/*.*'])
+    .pipe(gulp.dest('dist/build'));
 });
 
 gulp.task('clean', function () {
