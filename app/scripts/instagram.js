@@ -2,11 +2,40 @@
 
 $(document).ready(function () {
 
+  function getParameterByName(name, def, str) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)'),
+        results = regex.exec(location.search);
+
+    if (results === null) {
+      return def;
+    }
+
+    var query = decodeURIComponent(results[1].replace(/\+/g, ' '));
+
+    if (str === true) {
+      return query;
+    }
+
+    var number = parseInt(query, 10);
+    return number > 0 ? number : def;
+  }
+
+  // Instagram tag
+  var TAG = getParameterByName('TAG', 'pickasso', true);
+
   // 한 이미지를 유지하고 있는 시간(ms)
-  var IMG_DELAY = 5 * 1000;
+  var IMG_DELAY = getParameterByName('IMG_DELAY', 5);
 
   // Queue size
-  var MAX_QUEUE_SIZE = 20;
+  var MAX_QUEUE_SIZE = getParameterByName('MAX_QUEUE_SIZE', 20);
+
+  console.log('TAG : %s', TAG);
+  console.log('IMG_DELAY : %d', IMG_DELAY);
+  console.log('MAX_QUEUE_SIZE : %d', MAX_QUEUE_SIZE);
+
+  var IMG_DELAY_MILLI = IMG_DELAY * 1000;
 
   // Make queue
   function generateQueue () {
@@ -53,7 +82,7 @@ $(document).ready(function () {
         index = 0;
       }
 
-      console.log('[next] index=%d, maxIndex=%d, queueLen=%d', index, queueLen);
+      console.log('[next] index=%d, queueLen=%d', index, queueLen);
 
       return queue[index];
     }
@@ -67,10 +96,7 @@ $(document).ready(function () {
 
   }
 
-  var queueMap = {
-    pickasso: generateQueue(),
-    pickassotest: generateQueue()
-  };
+  var iQueue = generateQueue();
 
   // Socket IO job
   var socket = io('http://1.234.4.209:3000');
@@ -84,18 +110,15 @@ $(document).ready(function () {
         return;
       }
 
-      var queue = queueMap[payload.tag];
-
-      if (!queue) {
-        console.error('Cannot find queue');
+      if (payload.tag !== TAG) {
         return;
       }
 
       if (init) {
-        queue.reset();
+        iQueue.reset();
       }
 
-      queue.insert(payload.data);
+      iQueue.insert(payload.data);
     };
 
   }
@@ -108,8 +131,6 @@ $(document).ready(function () {
     socket.on('data', ioHandler(false));
 
   });
-
-  var iQueue = queueMap.pickassotest;
 
   var $instaGallery = $('#instaGallery');
 
@@ -148,7 +169,7 @@ $(document).ready(function () {
           $instaGallery.prepend(prevElem);
 
           play = function (cb) {
-            setTimeout(cb, IMG_DELAY);
+            setTimeout(cb, IMG_DELAY_MILLI);
           };
 
           prevElem.load(function () {

@@ -2,6 +2,35 @@
 
 $(document).ready(function () {
 
+  function getParameterByName(name, def, str) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)'),
+        results = regex.exec(location.search);
+
+    if (results === null) {
+      return def;
+    }
+
+    var query = decodeURIComponent(results[1].replace(/\+/g, ' '));
+
+    if (str === true) {
+      return query;
+    }
+
+    var number = parseInt(query, 10);
+    return number > 0 ? number : def;
+  }
+
+  var WALLPAPER_LOAD_TIME = getParameterByName('WALLPAPER_LOAD_TIME', 5);
+  var WALLPAPER_DELAY = getParameterByName('WALLPAPER_DELAY', 10);
+
+  console.log('WALLPAPER_LOAD_TIME : %d', WALLPAPER_LOAD_TIME);
+  console.log('WALLPAPER_DELAY : %d', WALLPAPER_DELAY);
+
+  var WALLPAPER_LOAD_TIME_MILLI = WALLPAPER_LOAD_TIME * 1000;
+  var WALLPAPER_DELAY_MILLI = WALLPAPER_DELAY * 1000;
+
   var WALLPAPER_LIST = [
 
     'webgl_video_panorama_equirectangular', // yes
@@ -31,9 +60,6 @@ $(document).ready(function () {
     'webgl_postprocessing_glitch' // yes
 
   ];
-
-  var WALLPAPER_LOAD_TIME = 5 * 1000;
-  var WALLPAPER_DELAY = 10 * 1000;
 
   var WALLPAPER_NUM = WALLPAPER_LIST.length;
 
@@ -81,8 +107,8 @@ $(document).ready(function () {
       curWallpaper = nextWallpaper;
       nextWallpaper = null;
 
-    }, WALLPAPER_LOAD_TIME);
+    }, WALLPAPER_LOAD_TIME_MILLI);
 
-  }, WALLPAPER_DELAY);
+  }, WALLPAPER_DELAY_MILLI);
 
 });
