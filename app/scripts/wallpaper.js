@@ -32,8 +32,8 @@ $(document).ready(function () {
 
   ];
 
-  var WALLPAPER_LOAD_TIME = 2 * 1000;
-  var WALLPAPER_DELAY = 6 * 1000;
+  var WALLPAPER_LOAD_TIME = 5 * 1000;
+  var WALLPAPER_DELAY = 10 * 1000;
 
   var WALLPAPER_NUM = WALLPAPER_LIST.length;
 
