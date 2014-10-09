@@ -49,7 +49,6 @@ $(document).ready(function () {
       'webgl_materials_cubemap_balls_reflection', // yes
       'webgl_materials_cubemap', // yes
 
-      'webgl_effects_vr', // yes
       'webgl_geometry_hierarchy', // yes
 //    'webgl_performance', // no
 //    'webgl_postprocessing_advanced', // no
@@ -77,7 +76,6 @@ $(document).ready(function () {
       'webgl_materials_cubemap_balls_reflection', // yes
       'webgl_materials_cubemap', // yes
 
-      'webgl_effects_vr', // yes
       'webgl_geometry_hierarchy', // yes
       'webgl_performance', // no
       'webgl_postprocessing_advanced', // no
