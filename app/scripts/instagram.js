@@ -36,6 +36,7 @@ $(document).ready(function () {
 
   var NOTI_PERIOD = getParameterByName('NOTI_PERIOD', 10);
 
+  var INSTA_TIMEOUT = getParameterByName('INSTA_TIMEOUT', 20);
   var NO_INSTAGRAM = getParameterByName('NO_INSTAGRAM', 'FALSE', true);
 
   console.log('DEBUG : %s', DEBUG);
@@ -44,6 +45,7 @@ $(document).ready(function () {
   console.log('IMG_DELAY : %d', IMG_DELAY);
   console.log('MAX_QUEUE_SIZE : %d', MAX_QUEUE_SIZE);
   console.log('NOTI_PERIOD : %d', NOTI_PERIOD);
+  console.log('INSTA_TIMEOUT : %d', INSTA_TIMEOUT);
   console.log('NO_INSTAGRAM : %s', NO_INSTAGRAM);
 
   if (NO_INSTAGRAM === 'TRUE') {
@@ -54,6 +56,8 @@ $(document).ready(function () {
   var IMG_DELAY_MILLI = IMG_DELAY * 1000;
 
   var DEBUG_MODE = DEBUG === 'TRUE';
+
+  var INSTA_TIMEOUT_MILLI = INSTA_TIMEOUT * 1000;
 
   // Make queue
   function generateQueue () {
@@ -175,7 +179,7 @@ $(document).ready(function () {
 
       obj = {
         type: 'image',
-        url: '/images/noti.jpg'
+        url: '/images/noti2.jpg'
       };
 
       notiCounter = 0;
@@ -189,15 +193,44 @@ $(document).ready(function () {
       };
     }
 
+    var INSTA_RESULT_OK = -1;
+    var INSTA_RESULT_TIMEOUT = -2;
+
     async.parallel({
 
       // Play current obj
       current: function (callback) {
+
         if (!prevResult) {
           return callback();
         }
 
-        prevResult.play(callback);
+        async.parallel([
+
+          // Play
+          function (cb) {
+            prevResult.play(function () {
+              cb(INSTA_RESULT_OK);
+            });
+          },
+
+          // Timeout
+          function (cb) {
+            setTimeout(function () {
+              cb(INSTA_RESULT_TIMEOUT);
+            }, INSTA_TIMEOUT_MILLI);
+          }
+
+        ], function (err) {
+
+          if (err === INSTA_RESULT_TIMEOUT) {
+            if (DEBUG_MODE) { console.error('current timeout'); }
+          }
+
+          callback();
+
+        });
+
       },
 
       // Load next obj
@@ -205,44 +238,71 @@ $(document).ready(function () {
 
         var prevElem, play;
 
-        if (obj.type === 'image') {
+        async.parallel([
 
-          prevElem = $('<img class="instagram-wrapper" src="' + obj.url + '">');
-          $instaGallery.prepend(prevElem);
+          // Load
+          function (cb) {
 
-          play = function (cb) {
-            setTimeout(cb, IMG_DELAY_MILLI);
-          };
+            if (obj.type === 'image') {
 
-          prevElem.load(function () {
-            callback(null, {
-              elem: prevElem,
-              play: play
-            });
+              prevElem = $('<img class="instagram-wrapper" src="' + obj.url + '">');
+              $instaGallery.prepend(prevElem);
+
+              play = function (cb) {
+                setTimeout(cb, IMG_DELAY_MILLI);
+              };
+
+              prevElem.load(function () {
+                cb(INSTA_RESULT_OK);
+              });
+
+            } else {
+
+              prevElem = $('<video class="instagram-wrapper" src="' + obj.url + '">');
+              $instaGallery.prepend(prevElem);
+
+              var rawVid = prevElem[0];
+
+              play = function (cb) {
+                rawVid.play();
+                prevElem.bind('ended', function () {
+                  cb();
+                });
+              };
+
+              rawVid.oncanplay = function () {
+                cb(INSTA_RESULT_OK);
+              };
+
+            }
+
+          },
+
+          // Timeout
+          function (cb) {
+            setTimeout(function () {
+              cb(INSTA_RESULT_TIMEOUT);
+            }, INSTA_TIMEOUT_MILLI);
+          }
+
+        ], function (err) {
+
+          if (err === INSTA_RESULT_TIMEOUT) {
+            if (DEBUG_MODE) { console.error('next timeout'); }
+
+            play = function (cb) {
+              cb();
+            };
+
+          }
+
+          callback(null, {
+            elem: prevElem,
+            play: play
           });
 
-        } else {
+        });
 
-          prevElem = $('<video class="instagram-wrapper" src="' + obj.url + '">');
-          $instaGallery.prepend(prevElem);
-
-          var rawVid = prevElem[0];
-
-          play = function (cb) {
-            rawVid.play();
-            prevElem.bind('ended', function () {
-              cb();
-            });
-          };
-
-          rawVid.oncanplay = function () {
-            callback(null, {
-              elem: prevElem,
-              play: play
-            });
-          };
-
-        }
       }
     }, function (err, results) {
       if (err) {
