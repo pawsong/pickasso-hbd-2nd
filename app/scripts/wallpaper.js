@@ -91,8 +91,6 @@ $(document).ready(function () {
 
   }
 
-  var WALLPAPER_NUM = WALLPAPER_LIST.length;
-
   var wallpaperIdx = 0;
 
   function isWebglSupported () {
@@ -122,6 +120,40 @@ $(document).ready(function () {
     return;
 
   }
+
+  function detectIE() {
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf('MSIE ');
+    var trident = ua.indexOf('Trident/');
+
+    if (msie > 0) {
+      // IE 10 or older => return version number
+      return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+    }
+
+    if (trident > 0) {
+      // IE 11 (or newer) => return version number
+      var rv = ua.indexOf('rv:');
+      return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+    }
+
+    // other browser
+    return false;
+  }
+
+  if (detectIE() !== false) {
+
+    WALLPAPER_LIST = [
+
+      'webgl_materials_cubemap_dynamic2', // no / pick / must be revised
+      'webgl_materials_cubemap', // yes
+      'webgl_materials_cubemap_balls_reflection', // yes / pick
+
+    ];
+
+  }
+
+  var WALLPAPER_NUM = WALLPAPER_LIST.length;
 
   function createWallpaperElement() {
 
