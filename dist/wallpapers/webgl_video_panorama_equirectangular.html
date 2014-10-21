@@ -95,6 +95,13 @@
 
 				window.addEventListener( 'resize', onWindowResize, false );
 
+                // Init
+                onPointerDownPointerX = window.innerWidth / 2;
+                onPointerDownPointerY = window.innerHeight / 2;
+
+                onPointerDownLon = lon;
+                onPointerDownLat = lat;
+
 			}
 
 			function onWindowResize() {
@@ -122,12 +129,12 @@
 
 			function onDocumentMouseMove( event ) {
 
-				if ( isUserInteracting === true ) {
+//				if ( isUserInteracting === true ) {
 
 					lon = ( onPointerDownPointerX - event.clientX ) * 0.1 + onPointerDownLon;
 					lat = ( event.clientY - onPointerDownPointerY ) * 0.1 + onPointerDownLat;
 
-				}
+//				}
 
 			}
 
