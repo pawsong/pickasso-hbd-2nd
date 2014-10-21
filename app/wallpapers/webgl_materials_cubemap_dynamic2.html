@@ -86,7 +86,17 @@
 
 				//
 
-				document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+                onPointerDownPointerX = window.innerWidth / 2;
+                onPointerDownPointerY = window.innerHeight / 2;
+
+                onPointerDownLon = lon;
+                onPointerDownLat = lat;
+
+                document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+//                document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+//
+//
+//				document.addEventListener( 'mousedown', onDocumentMouseDown, false );
 				document.addEventListener( 'mousewheel', onDocumentMouseWheel, false );
 				document.addEventListener( 'DOMMouseScroll', onDocumentMouseWheel, false);
 				window.addEventListener( 'resize', onWindowResized, false );
@@ -99,21 +109,6 @@
 
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				camera.projectionMatrix.makePerspective( fov, window.innerWidth / window.innerHeight, 1, 1100 );
-			}
-
-			function onDocumentMouseDown( event ) {
-
-				event.preventDefault();
-
-				onPointerDownPointerX = event.clientX;
-				onPointerDownPointerY = event.clientY;
-
-				onPointerDownLon = lon;
-				onPointerDownLat = lat;
-
-				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-				document.addEventListener( 'mouseup', onDocumentMouseUp, false );
-
 			}
 
 			function onDocumentMouseMove( event ) {
