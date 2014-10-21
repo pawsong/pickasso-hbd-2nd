@@ -116,7 +116,9 @@ $(document).ready(function () {
   // Check if webgl is supported
   if (isMobile() || !(Modernizr.webgl && isWebglSupported())){
 
-    $body.addClass('pkss-background-gif');
+    var bg = $('<img src="/images/wallpaper.gif" class="pkss-background"/>');
+
+    $body.append(bg);
     return;
 
   }
