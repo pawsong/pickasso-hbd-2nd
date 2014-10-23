@@ -22,7 +22,7 @@ $(document).ready(function () {
     return number > 0 ? number : def;
   }
 
-  var WALLPAPER_LOAD_TIME = getParameterByName('WALLPAPER_LOAD_TIME', 3);
+  var WALLPAPER_LOAD_TIME = getParameterByName('WALLPAPER_LOAD_TIME', 5);
   var WALLPAPER_DELAY = getParameterByName('WALLPAPER_DELAY', 10);
   var LOW_PERFORMANCE = getParameterByName('LOW_PERFORMANCE', 'FALSE', true);
 
