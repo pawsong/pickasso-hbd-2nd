@@ -121,8 +121,8 @@ $(document).ready(function () {
 
   [{
     type: 'image',
-    link: 'http://www.4983project.com/product/detail.html?product_no=184&cate_no=46&display_group=1',
-    url: '/images/products/cover06.png'
+    link: 'https://soundcloud.com/picka-o/3dgng-bgm',
+    url: '/images/products/cover07.png'
   }, {
     type: 'image',
     link: 'http://www.4983project.com/product/detail.html?product_no=185&cate_no=46&display_group=1',
